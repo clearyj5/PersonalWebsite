@@ -71,11 +71,9 @@ body {
     position: relative;
     height: 100vh;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    text-align: center;
-    background: var(--background-color);
-    overflow: hidden;
+    align-items: center;
 }
 
 .background-image {
@@ -99,7 +97,10 @@ body {
 
 .hero-content {
     position: relative;
+    text-align: center;
     z-index: 2;
+    margin-top: 20vh;
+    padding: 20px;
 }
 
 .hero-content h1 {
