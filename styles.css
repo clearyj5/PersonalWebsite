@@ -161,7 +161,7 @@ section h2,
 }
 
 section {
-    height: 100vh;
+    min-height: 100vh;
     scroll-snap-align: start;
     scroll-snap-stop: always;
     padding: 4rem 2rem;
@@ -204,6 +204,7 @@ h2 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
+    margin-bottom: 2rem;
 }
 
 .project-card {
@@ -280,6 +281,21 @@ footer {
     
     .hero-content h2 {
         font-size: 1.2rem;
+    }
+
+    section {
+        height: auto;
+        padding: 6rem 1.5rem;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .project-card {
+        min-height: auto;
+        padding: 1.5rem;
     }
 }
 
