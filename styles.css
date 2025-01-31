@@ -91,8 +91,10 @@ body {
     background-size: cover;
     background-position: center;
     border-radius: 50%;
-    opacity: 0.3;
+    opacity: 0;
     filter: grayscale(100%);
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: 0.5s;
 }
 
 .hero-content {
@@ -103,11 +105,27 @@ body {
     padding: 20px;
 }
 
+.hero-content h1,
+.hero-content h2,
+.social-links,
+section h2,
+.about-content p,
+.skill,
+.projects-intro,
+.cv-content {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .hero-content h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
     font-weight: 700;
     letter-spacing: -1px;
+    animation: fadeInDown 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.3s;
 }
 
 .hero-content h2 {
@@ -116,6 +134,8 @@ body {
     margin-bottom: 2rem;
     font-family: 'Fira Code', monospace;
     font-weight: 400;
+    animation: fadeInDown 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.5s;
 }
 
 .highlight {
@@ -127,6 +147,8 @@ body {
     gap: 1rem;
     justify-content: center;
     font-size: 1.5rem;
+    animation: fadeInDown 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.7s;
 }
 
 .social-links a {
@@ -176,15 +198,6 @@ h2 {
     border-radius: 20px;
     font-size: 0.9rem;
     font-family: 'Fira Code', monospace;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    transition-delay: calc(var(--order) * 0.1s);
-}
-
-.skill.visible {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 .project-grid {
@@ -199,26 +212,18 @@ h2 {
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s ease;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    transition-delay: calc(var(--order) * 0.1s);
     color: var(--text-color);
     min-height: 300px;
+    will-change: transform;
+    transition: transform 0.2s ease-out;
 }
 
 .project-card > *:not(.project-links) {
     flex-shrink: 0;
 }
 
-.project-card.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
 .project-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
 }
 
 .project-links {
@@ -393,7 +398,8 @@ footer {
     bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
-    animation: bounce 2s infinite;
+    animation: fadeInDown 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 1s;
     cursor: pointer;
     opacity: 0.7;
     transition: opacity 0.3s ease;
@@ -418,6 +424,26 @@ footer {
     }
     60% {
         transform: translateY(-10px) translateX(-50%);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.3;
     }
 }
 
@@ -485,14 +511,6 @@ footer {
     margin: 0 auto 3rem auto;
     text-align: center;
     color: var(--text-color);
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.projects-intro.visible {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 .project-card p {
@@ -501,4 +519,39 @@ footer {
 
 .project-card p:last-of-type {
     margin-bottom: 1.5rem;
+}
+
+.fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-up.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+
+#cv h2.fade-up,
+#cv .cv-content.fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#cv .cv-content.fade-up {
+    transition-delay: 0.2s;
+}
+
+#cv h2.fade-up.active,
+#cv .cv-content.fade-up.active {
+    opacity: 1;
+    transform: translateY(0);
 }

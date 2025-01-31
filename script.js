@@ -95,4 +95,84 @@ window.addEventListener('scroll', () => {
     }
     
     lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Initial load animations for hero section
+    const heroElements = document.querySelectorAll('#home .hero-content > *');
+    heroElements.forEach((el, index) => {
+        el.classList.add('active');
+        el.style.transitionDelay = `${index * 0.2}s`;
+    });
+
+    // Scroll animations for other sections
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            // Get all animatable elements in the section
+            const elements = entry.target.querySelectorAll('.fade-up');
+            
+            if (entry.isIntersecting) {
+                // Special handling for skills section with shorter delays
+                if (entry.target.id === 'about') {
+                    elements.forEach((el, index) => {
+                        if (el.classList.contains('skill')) {
+                            el.style.transitionDelay = `${0.1 + (index * 0.05)}s`;
+                        }
+                    });
+                }
+                
+                // Special handling for project cards
+                if (entry.target.id === 'projects') {
+                    elements.forEach((el, index) => {
+                        if (el.classList.contains('project-card')) {
+                            el.style.transitionDelay = `${0.2}s`; // All cards appear together
+                        }
+                    });
+                }
+                
+                // Animate all elements
+                elements.forEach(el => {
+                    el.classList.add('active');
+                });
+            } else {
+                // Fade out elements when scrolling away
+                elements.forEach(el => {
+                    el.style.transitionDelay = '0s';
+                    el.classList.remove('active');
+                });
+            }
+        });
+    }, {
+        threshold: 0.2,
+        rootMargin: '-20% 0px'
+    });
+
+    // Observe all sections
+    document.querySelectorAll('section:not(#home)').forEach(section => {
+        observer.observe(section);
+    });
+
+    // Create separate observer for hero section
+    const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const elements = entry.target.querySelectorAll('.hero-content > *');
+            if (entry.isIntersecting) {
+                elements.forEach((el, index) => {
+                    el.style.transitionDelay = `${index * 0.2}s`;
+                    el.classList.add('active');
+                });
+            } else {
+                elements.forEach(el => {
+                    el.style.transitionDelay = '0s';
+                    el.classList.remove('active');
+                });
+            }
+        });
+    }, {
+        threshold: 0.5
+    });
+
+    // Observe hero section
+    const heroSection = document.querySelector('#home');
+    heroObserver.observe(heroSection);
 }); 
