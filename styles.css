@@ -201,13 +201,17 @@ h2 {
 }
 
 .project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    display: flex;                /* Use flexbox instead of grid */
+    flex-wrap: nowrap;            /* Prevent wrapping to new rows */
+    gap: 2rem;                    /* Keep spacing between cards */
+    overflow-x: auto;             /* Enable horizontal scrolling */
+    padding-bottom: 1rem;         /* Add space for scrollbar */
     margin-bottom: 2rem;
+    scroll-behavior: smooth;      /* Smooth scroll when using JS or mouse */
 }
 
 .project-card {
+    flex: 0 0 400px;              /* Keep cards at min width of 300px */
     background: var(--card-background);
     padding: 2rem;
     border-radius: 10px;
@@ -217,6 +221,14 @@ h2 {
     min-height: 300px;
     will-change: transform;
     transition: transform 0.2s ease-out;
+}
+
+/* Make the buttons container stick to bottom */
+.project-links {
+    margin-top: auto; /* pushes buttons to bottom of card */
+    display: flex;
+    gap: 1rem;        /* optional spacing between buttons */
+    flex-wrap: wrap;  /* wrap on mobile if needed */
 }
 
 .project-card > *:not(.project-links) {
@@ -230,10 +242,10 @@ h2 {
 .project-links {
     display: flex;
     justify-content: center;
-    gap: 1rem;
-    flex: 1;
+    gap: 2rem;
+    margin-top: auto; /* <-- pushes buttons to bottom */
+    padding-bottom: 1rem; 
     align-items: center;
-    padding-top: 2rem;
 }
 
 .btn {
@@ -289,13 +301,13 @@ footer {
     }
 
     .project-grid {
-        grid-template-columns: 1fr;
         gap: 1.5rem;
     }
 
     .project-card {
-        min-height: auto;
+        flex: 0 0 250px;  /* slightly smaller on mobile */
         padding: 1.5rem;
+        min-height: auto;
     }
 }
 

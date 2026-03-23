@@ -176,3 +176,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroSection = document.querySelector('#home');
     heroObserver.observe(heroSection);
 }); 
+
+// Automatically set the current year in the footer
+const yearSpan = document.getElementById('year');
+const currentYear = new Date().getFullYear();
+yearSpan.textContent = currentYear;
